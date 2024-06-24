@@ -1,17 +1,17 @@
 package modules;
 
-public class warehouse {
+public class Warehouse {
     private boolean open;
     private float fixedCost;
     private int capacity;
 
-    public warehouse (){
+    public Warehouse(){
         this.open = false;
         this.fixedCost = 0;
         this.capacity = 0;
     }
 
-    public warehouse(float fixedCost, int capacity){
+    public Warehouse(float fixedCost, int capacity){
         this.open = false;
         this.fixedCost = fixedCost;
         this.capacity = capacity;

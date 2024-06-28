@@ -8,44 +8,78 @@ public class Switch {
 
     private DataContainer container;
     private List<Warehouse> warehouseList;
+
     private List<Client> clientList;
-    private List<Integer> openedWarehousesIndex;
-    private List<Integer> closedWarehousesIndex;
-    private float bestSolution;
+    private float bestSolutionCost;
+    private List<Boolean> bestSolution;
+    private List<Boolean> currentSolution;
+
     private Random rand;
 
     public Switch(DataContainer container){
         this.container = container;
         this.warehouseList = this.container.getWarehouses();
         this.clientList = this.container.getClients();
-        this.bestSolution = 0;
-        this.openedWarehousesIndex = new ArrayList<>();
-        this.closedWarehousesIndex = new ArrayList<>();
-        this.rand = new Random();
+        this.bestSolutionCost = 0;
+        this.rand= new Random();
+        this.bestSolution = new ArrayList<>();
+        this.currentSolution = new ArrayList<>();
     }
     private void getInitialSolution(){
 
         float currentSolution = 0;
+        List<Boolean> current = new ArrayList<>();
 
-        // Initialize all warehouses as closed
+        // Inicializar listas de instalações abertas e fechadas
         for (int i = 0; i < warehouseList.size(); i++) {
-            warehouseList.get(i).setOpen(false);
-            closedWarehousesIndex.add(i);
+            current.add(false);
+
         }
 
         // Open warehouses with even indices
         for (int i = 0; i < warehouseList.size(); i++) {
             if (i % 2 == 0) {
-                warehouseList.get(i).setOpen(true);
-                openedWarehousesIndex.add(i);
-                closedWarehousesIndex.remove(Integer.valueOf(i));
+                current.set(i, true);
             }
         }
 
-        currentSolution = calculateSolutionCost();
-        this.bestSolution = currentSolution;
+        this.currentSolution = current;
+        this.bestSolutionCost = calculateSolutionCost(current);
 
     }
+
+    private List<List<Boolean>> generateNeighbours(){
+        List<List<Boolean>> neighbours = new ArrayList<>();
+
+        for(int i = 0; i < warehouseList.size(); i++){
+            List<Boolean> neighbourSolution = new ArrayList<>(this.currentSolution);
+            neighbourSolution.set(i,false);
+            neighbours.add(neighbourSolution);
+        }
+        return neighbours;
+    }
+
+    private void localSearch(){
+        boolean improvement = true;
+
+        while(improvement){
+            improvement = false;
+            List<List<Boolean>> neighbours = generateNeighbours();
+
+            for(List<Boolean> neighbour : neighbours){
+                float neighbourCost = calculateSolutionCost(neighbour);
+                if(neighbourCost < this.bestSolutionCost){
+                    this.bestSolutionCost = neighbourCost;
+                    this.bestSolution = neighbour;
+                    improvement = true;
+                }
+            }
+            this.currentSolution = this.bestSolution;
+
+        }
+
+    }
+    /*
     private void performSwitch() {
         // Loop until no further improvement or convergence criteria met
         int MAX_ITERATIONS = 10000;
@@ -77,17 +111,19 @@ public class Switch {
         }
     }
 
+     */
+
     public void useSwitch(){
         long start = System.nanoTime();
 
         getInitialSolution();
-        System.out.println("Initial solution cost: " + this.bestSolution);
-        performSwitch();
+        System.out.println("Initial solution cost: " + this.bestSolutionCost);
+        localSearch();
 
         long end = System.nanoTime();
         long elapsedTime = end - start;
         double elapsedTimeInSeconds = elapsedTime / 1_000_000_000.0;
-        System.out.println("Best Soluction Found: " + this.bestSolution);
+        System.out.println("Best Soluction Found: " + this.bestSolutionCost);
         System.out.println("Time elapsed: " + elapsedTimeInSeconds + " seconds");
     }
 
@@ -96,13 +132,13 @@ public class Switch {
      * This includes the fixed costs of open warehouses and allocation costs to clients.
      * @return Total cost of the current solution.
      */
-    private float calculateSolutionCost() {
+    private float calculateSolutionCost(List<Boolean> solution) {
         float totalCost = 0;
 
         // Calcular custo fixo das instalações abertas
-        for (Warehouse warehouse : warehouseList) {
-            if (warehouse.isOpen()) {
-                totalCost += warehouse.getFixedCost();
+        for(int i = 0; i < solution.size(); i++){
+            if(solution.get(i)){
+                totalCost+= warehouseList.get(i).getFixedCost();
             }
         }
 
@@ -111,8 +147,8 @@ public class Switch {
         // o custo da warehouse mais baixo
         for (Client client : clientList) {
             float minAllocCost = Float.MAX_VALUE;
-            for (int i = 0; i < warehouseList.size(); i++) {
-                if (warehouseList.get(i).isOpen()) {
+            for (int i = 0; i <solution.size(); i++) {
+                if (solution.get(i)) {
                     minAllocCost = Math.min(minAllocCost, client.getAllocCosts().get(i));
                 }
             }

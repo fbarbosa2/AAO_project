@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         fileReader reader = new fileReader();
         Scanner scan = new Scanner(System.in);
-        String filePath = "C:\\Users\\Francisco\\Desktop\\AAO_project\\src\\FicheirosTeste\\M\\Kcapmo1.txt";
+        String filePath = "C:\\Users\\Francisco\\Desktop\\AAO_project\\src\\FicheirosTeste\\ORLIB\\ORLIB-uncap\\100\\cap101.txt";
         try {
 
             DataContainer data = reader.readFile(filePath);

@@ -44,7 +44,6 @@ public class fileReader {
                     warehouseArray[0] = warehouseArray[1];
                     warehouseArray[1] = warehouseArray[2];
                 }
-                int capacity = Integer.parseInt(warehouseArray[0]);
                 float fixedCost = Float.parseFloat(warehouseArray[1]);
                 Warehouse warehouse = new Warehouse(fixedCost);
                 warehouses.add(warehouse);
@@ -54,7 +53,12 @@ public class fileReader {
 
             //Reading and Creation of Clients
             for (int i = 0; i < numClients; i++) {
-                int demand = Integer.parseInt(br.readLine().strip());
+                String cLine = br.readLine();
+                if (cLine.isEmpty()) {
+                    continue;
+                } else {
+                    int demand = Integer.parseInt(cLine.strip());
+                }
                 List<Float> allocationCosts = new ArrayList<>();
 
 

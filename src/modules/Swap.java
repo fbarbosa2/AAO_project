@@ -158,7 +158,7 @@ public class Swap {
      * Executes the swap algorithm to find the best solution.
      * Prints initial and best solution costs, and the elapsed time.
      */
-    public void useSwap(){
+    public AlgorithmResult useSwap() {
         long start = System.nanoTime();
 
         getInitialSolution();
@@ -170,5 +170,7 @@ public class Swap {
         double elapsedTimeInSeconds = elapsedTime / 1_000_000_000.0;
         System.out.println("Best Solution Found: " + this.bestSolutionCost);
         System.out.println("Time elapsed: " + elapsedTimeInSeconds + " seconds");
+
+        return new AlgorithmResult(this.bestSolutionCost, elapsedTimeInSeconds);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * fileReader Class
  * This class is responsible for reading the .txt files and creating the Warehouse and Client Objects
- * and adding them to a DataContainer with Lists
+ * and adding them to a DataContainer with Lists.
  */
 public class fileReader {
 
@@ -25,71 +25,65 @@ public class fileReader {
      */
     public DataContainer readFile(String fileName) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            // Reading the number of warehouses and clients
             String line = br.readLine();
             String[] array = line.split("\\s+");
-            if (array[0].equals("")){
-                array[0] = array[1];
-                array[1] = array[2];
+            if (array.length < 2) {
+                throw new IOException("Invalid format for number of warehouses and clients.");
             }
             int numWarehouses = Integer.parseInt(array[0].strip());
             int numClients = Integer.parseInt(array[1].strip());
+
             List<Warehouse> warehouses = new ArrayList<>();
             List<Client> clients = new ArrayList<>();
 
-            //Reading and Creation of Warehouses
-            for(int i = 0; i < numWarehouses; i++){
+            // Reading and creation of Warehouses
+            for (int i = 0; i < numWarehouses; i++) {
                 String warehousesInfo = br.readLine();
                 String[] warehouseArray = warehousesInfo.split("\\s+");
-                if (warehouseArray[0].equals("")){
-                    warehouseArray[0] = warehouseArray[1];
-                    warehouseArray[1] = warehouseArray[2];
+                if (warehouseArray.length < 2) {
+                    throw new IOException("Invalid format for warehouse information.");
                 }
                 float fixedCost = Float.parseFloat(warehouseArray[1]);
                 Warehouse warehouse = new Warehouse(fixedCost);
                 warehouses.add(warehouse);
-                //System.out.println("warehouse " + i + " capacity : " + warehouse.getCapacity());
-                //System.out.println("warehouse " + i + " fixedCost : " + warehouse.getFixedCost());
             }
 
-            //Reading and Creation of Clients
+            // Reading and creation of Clients
             for (int i = 0; i < numClients; i++) {
                 String cLine = br.readLine();
-                if (cLine.isEmpty()) {
-                    continue;
-                } else {
-                    int demand = Integer.parseInt(cLine.strip());
-                }
-                List<Float> allocationCosts = new ArrayList<>();
 
+                if (cLine == null || cLine.trim().isEmpty()) {
+
+                    cLine = br.readLine();
+                }
+                int demand = Integer.parseInt(cLine.strip());
+                List<Float> allocationCosts = new ArrayList<>();
 
                 int costsToRead = numWarehouses;
                 while (allocationCosts.size() < costsToRead) {
                     line = br.readLine();
+                    if (line == null) {
+                        throw new IOException("Unexpected end of file while reading client costs.");
+                    }
                     String[] costsArray = line.trim().split("\\s+");
                     for (String cost : costsArray) {
                         if (allocationCosts.size() < costsToRead) {
                             allocationCosts.add(Float.parseFloat(cost));
                         } else {
-                            break; // Stop adding costs once we have enough
+                            break; // Stop adding costs once we get all the costs attributed to that client
                         }
                     }
                 }
-
-
+                System.out.println("Alloc Cost client: "+ (i + 1) + " : ");
+                for(float cost : allocationCosts){
+                    System.out.println(cost);
+                }
                 Client client = new Client(allocationCosts);
                 clients.add(client);
-
-
-                //System.out.println("Client " + i + " demand: " + client.getDemand());
-                /*for (Float cost : client.getAllocCosts()) {
-                    System.out.print(cost + " ");
-                }
-                System.out.println(); // Move to next line after printing costs
-
-                 */
             }
-            DataContainer container = new DataContainer(warehouses, clients);
 
+            DataContainer container = new DataContainer(warehouses, clients);
             return container;
 
         } catch (IOException e) {
@@ -97,8 +91,4 @@ public class fileReader {
             return null;
         }
     }
-
-
 }
-
-

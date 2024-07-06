@@ -12,13 +12,22 @@ public class Main {
     public static void main(String[] args) {
         fileReader reader = new fileReader();
         Scanner scan = new Scanner(System.in);
-        String dirPath = "C:\\Users\\Francisco\\Desktop\\AAO_project\\src\\FicheirosTeste\\ORLIB\\ORLIB-uncap\\a-c";
+        //Change this variable for reading all the files in a dir (true) or only a single file (false)
+        boolean readAllFiles = true;
 
-        List<String> filePaths = getFilePaths(dirPath);
+        List<String> filePaths = new ArrayList<>();
+
+        if (readAllFiles) {
+            String dirPath = "C:\\Users\\Francisco\\Desktop\\AAO_project\\src\\FicheirosTeste\\M";
+            filePaths = getFilePaths(dirPath);
+        } else {
+            String filePath = "C:\\Users\\Francisco\\Desktop\\AAO_project\\src\\FicheirosTeste\\M\\Kcapmp1.txt";
+            filePaths.add(filePath);
+        }
+
         List<String> results = new ArrayList<>();
 
-        // Mostrar o menu uma vez e escolher o algoritmo
-        System.out.print("1-Swap\n2-Switch\n3-Greedy\n0-Sair\nOpcao: ");
+        System.out.print("1-Swap Normal\n2-Improved Swap\n3-Switch\n4-Greedy\n0-Sair\nOpcao: ");
         int op = Integer.parseInt(scan.nextLine());
 
         if (op == 0) {
@@ -37,10 +46,14 @@ public class Main {
                         result = swapAlg.useSwap();
                         break;
                     case 2:
+                        ImprovSwap improvSwapAlg = new ImprovSwap(data);
+                        result = improvSwapAlg.useSwap();
+                        break;
+                    case 3:
                         Switch switchAlg = new Switch(data);
                         result = switchAlg.useSwitch();
                         break;
-                    case 3:
+                    case 4:
                         Greedy greedy = new Greedy(data);
                         result = greedy.useGreedy();
                         break;
@@ -83,4 +96,3 @@ public class Main {
         }
     }
 }
-

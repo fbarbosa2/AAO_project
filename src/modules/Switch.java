@@ -48,11 +48,15 @@ public class Switch {
 
     private List<List<Boolean>> generateNeighbours(){
         List<List<Boolean>> neighbours = new ArrayList<>();
-
         for(int i = 0; i < warehouseList.size(); i++){
             List<Boolean> neighbourSolution = new ArrayList<>(this.currentSolution);
-            neighbourSolution.set(i,false);
-            neighbours.add(neighbourSolution);
+            if(neighbourSolution.get(i)) {
+                neighbourSolution.set(i,false);
+                // Verificar se ao menos um armazém está aberto
+                if(neighbourSolution.contains(true)) {
+                    neighbours.add(neighbourSolution);
+                }
+            }
         }
         return neighbours;
     }
@@ -121,7 +125,9 @@ public class Switch {
                 }
             }
             totalCost += minAllocCost;
+
         }
+
 
         return totalCost;
     }

@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97381002-6d10-4404-8b48-47d3b0ced6fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/AlgorithmResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/Greedy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Swap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Swap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/Greedy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Greedy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/Switch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Switch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/fileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/fileReader.java" afterDir="false" />
     </list>
@@ -66,7 +65,13 @@
       <workItem from="1719528645200" duration="244000" />
       <workItem from="1719529067157" duration="2084000" />
       <workItem from="1719579379390" duration="9828000" />
-      <workItem from="1719839467940" duration="8695000" />
+      <workItem from="1719839467940" duration="10109000" />
+      <workItem from="1719947492578" duration="888000" />
+      <workItem from="1719951635359" duration="1419000" />
+      <workItem from="1720091083715" duration="937000" />
+      <workItem from="1720096306874" duration="1823000" />
+      <workItem from="1720188370298" duration="8701000" />
+      <workItem from="1720261752312" duration="7359000" />
     </task>
     <servers />
   </component>

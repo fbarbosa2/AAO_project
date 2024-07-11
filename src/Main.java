@@ -8,11 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class that contains the main method to run the application.
+ */
 public class Main {
+
+    /**
+     * Main method that executes the application.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         fileReader reader = new fileReader();
         Scanner scan = new Scanner(System.in);
-        //Change this variable for reading all the files in a dir (true) or only a single file (false)
+        // Change this variable to read all files in a directory (true) or only a single file (false)
         boolean readAllFiles = true;
 
         List<String> filePaths = new ArrayList<>();
@@ -25,9 +34,10 @@ public class Main {
             filePaths.add(filePath);
         }
 
+        // List to store the results of the algorithms
         List<String> results = new ArrayList<>();
 
-        System.out.print("1-Swap Normal\n2-Improved Swap\n3-Switch\n4-Greedy\n0-Sair\nOpcao: ");
+        System.out.print("1-Swap Normal\n2-Improved Swap\n3-Switch\n4-Greedy\n0-Exit\nOption: ");
         int op = Integer.parseInt(scan.nextLine());
 
         if (op == 0) {
@@ -35,8 +45,10 @@ public class Main {
             return;
         }
 
+        // Process each file in the list of file paths
         for (String filePath : filePaths) {
             try {
+                // Reads the file and stores the data
                 DataContainer data = reader.readFile(filePath);
                 AlgorithmResult result = null;
 
@@ -58,10 +70,11 @@ public class Main {
                         result = greedy.useGreedy();
                         break;
                     default:
-                        System.out.println("Não é uma opção");
+                        System.out.println("Not an option");
                         continue;
                 }
 
+                // If a result is obtained, add it to the results list
                 if (result != null) {
                     String fileName = new File(filePath).getName();
                     results.add("Results for " + fileName + ": " + result);
@@ -75,6 +88,12 @@ public class Main {
         writeResultsToFile(results, "C:\\Users\\Francisco\\Desktop\\AAO_project\\results.txt");
     }
 
+    /**
+     * Gets the file paths of all text files in a directory.
+     *
+     * @param dirPath The directory path.
+     * @return A list of file paths.
+     */
     private static List<String> getFilePaths(String dirPath) {
         List<String> filePaths = new ArrayList<>();
         File dir = new File(dirPath);
@@ -86,6 +105,12 @@ public class Main {
         return filePaths;
     }
 
+    /**
+     * Writes the results to a file.
+     *
+     * @param results The list of results.
+     * @param outputPath The output file path.
+     */
     private static void writeResultsToFile(List<String> results, String outputPath) {
         try (FileWriter writer = new FileWriter(outputPath)) {
             for (String result : results) {

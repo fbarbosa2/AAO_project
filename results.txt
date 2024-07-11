@@ -1,1 +1,20 @@
-
+Results for Kcapmo1.txt: Best Solution Cost: 1373.7969970703125, Time Elapsed: 0.0663405 seconds
+Results for Kcapmo2.txt: Best Solution Cost: 1476.26904296875, Time Elapsed: 0.0052589 seconds
+Results for Kcapmo3.txt: Best Solution Cost: 1731.908935546875, Time Elapsed: 0.0010185 seconds
+Results for Kcapmo4.txt: Best Solution Cost: 1520.732177734375, Time Elapsed: 8.091E-4 seconds
+Results for Kcapmo5.txt: Best Solution Cost: 1473.6939697265625, Time Elapsed: 9.13E-4 seconds
+Results for Kcapmp1.txt: Best Solution Cost: 3020.08740234375, Time Elapsed: 0.0039128 seconds
+Results for Kcapmp2.txt: Best Solution Cost: 3077.9892578125, Time Elapsed: 0.0028311 seconds
+Results for Kcapmp3.txt: Best Solution Cost: 3320.6533203125, Time Elapsed: 0.0053247 seconds
+Results for Kcapmp4.txt: Best Solution Cost: 3531.104736328125, Time Elapsed: 0.0038398 seconds
+Results for Kcapmp5.txt: Best Solution Cost: 2838.404296875, Time Elapsed: 0.0023064 seconds
+Results for Kcapmq1.txt: Best Solution Cost: 4341.09912109375, Time Elapsed: 0.0037063 seconds
+Results for Kcapmq2.txt: Best Solution Cost: 4318.0322265625, Time Elapsed: 0.0077669 seconds
+Results for Kcapmq3.txt: Best Solution Cost: 4169.04443359375, Time Elapsed: 0.0036871 seconds
+Results for Kcapmq4.txt: Best Solution Cost: 4475.794921875, Time Elapsed: 0.0036653 seconds
+Results for Kcapmq5.txt: Best Solution Cost: 4610.61328125, Time Elapsed: 0.0025215 seconds
+Results for Kcapmr1.txt: Best Solution Cost: 2761.147216796875, Time Elapsed: 0.0273914 seconds
+Results for Kcapmr2.txt: Best Solution Cost: 2727.509765625, Time Elapsed: 0.0095534 seconds
+Results for Kcapmr3.txt: Best Solution Cost: 2413.0810546875, Time Elapsed: 0.0092545 seconds
+Results for Kcapmr4.txt: Best Solution Cost: 2880.881591796875, Time Elapsed: 0.0108322 seconds
+Results for Kcapmr5.txt: Best Solution Cost: 2756.25537109375, Time Elapsed: 0.032569 seconds
